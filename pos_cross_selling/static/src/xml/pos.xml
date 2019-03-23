@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="Orderline">
+        <t t-jquery='span.product-name' t-operation="append">
+            <t t-if="line.get_cross_selling_items().length > 0">
+                <i class="fa fa-tags cross_selling_icon" aria-hidden="true"></i>
+            </t>
+        </t>
+    </t>
+
+    <t t-extend="Product">
+        <t t-jquery="[t-if='!product.to_weight']" t-operation="replace">
+            <t t-if="!product.to_weight">
+                <span class="price-tag">
+                    <t t-if="product.cross_selling_price and widget.pos.get_order().get_cross_selling_mode()">
+                        <t t-esc="widget.format_currency(product.cross_selling_price,'Product Price')"/>
+                    </t>
+                    <t t-if="!product.cross_selling_price or !widget.pos.get_order().get_cross_selling_mode()">
+                        <t t-esc="widget.format_currency(product.get_price(pricelist, 1),'Product Price')"/>
+                    </t>
+                </span>
+            </t>
+        </t>
+        <t t-jquery='[t-if="product.to_weight"]' t-operation="replace">
+            <t t-if="product.to_weight">
+                <span class="price-tag">
+                    <t t-if="product.cross_selling_price and widget.pos.get_order().get_cross_selling_mode()">
+                        <t t-esc="widget.format_currency(product.cross_selling_price,'Product Price')+'/'+widget.pos.units_by_id[product.uom_id[0]].name"/>
+                    </t>
+                    <t t-if="!product.cross_selling_price or !widget.pos.get_order().get_cross_selling_mode()">
+                        <t t-esc="widget.format_currency(product.get_price(pricelist, 1),'Product Price')+'/'+widget.pos.units_by_id[product.uom_id[0]].name"/>
+                    </t>
+                </span>
+            </t>
+        </t>
+    </t>
+
+    <t t-extend="ProductListWidget">
+        <t t-jquery="div.product-list" t-operation="before">
+            <t t-if="widget.pos.get_order().get_cross_selling_mode()">
+                <div class="back_cross_selling">
+		            <span class='button back'>
+		                <i class='fa fa-angle-double-left'></i>
+		                Back
+		            </span>
+	            </div>
+            </t>
+        </t>
+    </t>
+</templates>

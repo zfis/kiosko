@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_cross_selling,access.product.cross.selling,model_product_cross_selling,base.group_user,1,1,1,1
+access_product_cross_selling_line,access.product.cross.selling.line,model_product_cross_selling_line,base.group_user,1,1,1,1
+access_product_cross_selling_history,access.product.cross.selling.history,model_product_cross_selling_history,base.group_user,1,1,1,1

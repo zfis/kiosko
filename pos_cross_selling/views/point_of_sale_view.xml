@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="ace_view_pos_config_form">
+            <field name="name">pos.config.form.view.inherit</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+            <field name="arch" type="xml">
+                <div id="category_reference" position="after">
+	               <div class="col-xs-12 col-md-6 o_setting_box" id="cross_selling">
+	                    <div class="o_setting_left_pane">
+	                        <field name="enable_cross_selling"/>
+	                    </div>
+	                   <div class="o_setting_right_pane">
+	                        <label for="enable_cross_selling"/>
+	                        <div class="text-muted" id="pos_cross_selling">
+	                           Enable to use in POS interface
+	                        </div>
+	                    </div>
+	               </div>
+	            </div>
+            </field>
+        </record>
+
+    </data>
+</openerp>

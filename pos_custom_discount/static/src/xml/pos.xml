@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="CustomDiscountPopupWidget">
+        <div class="modal-dialog">
+            <div class="popup">
+                <p class="title">
+                     Discount
+                </p>
+                <div class="content-container ">
+                    <table style="margin-left: 18px;margin-top: 13px;">
+                        <tr>
+                            <td>Discount</td>
+                            <td><input type="text" class="discount_amount"/></td>
+                        </tr>
+                    </table>
+                    <textarea rows="4" cols="42" placeholder="Description" style="margin-top: 13px;" class="discount_note"></textarea>
+                </div>
+                <div class="footer">
+                    <div class="button all_order">
+                        All Order
+                    </div>
+                    <div class="button specific_line">
+                        Specific line
+                    </div>
+                    <div class="button cancel">
+                        Cancel 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+    <t t-name="FixDiscountPopupWidget">
+        <div class="modal-dialog">
+            <div class="popup">
+                <p class="title">
+                     Discount
+                </p>
+                <div class="content-container ">
+                    <div style="height: 280px;overflow: scroll;">
+                        <t t-if="widget.pos.pos_discount">
+                            <t t-foreach="widget.pos.pos_discount" t-as="discount">
+                                <div style="float: left;width: 155px;font-size: 13px;height: 50px;border: 1px solid;margin: 2px;" class="merge-table" t-att-data-discount='discount.discount'>
+                                    <div style="margin-top: 6px;"><t t-esc="discount.name"/></div>
+                                </div>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="button all_order">
+                        All Order
+                    </div>
+                    <div class="button specific_line">
+                        Specific line
+                    </div>
+                    <div class="button cancel">
+                        Cancel 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+     <t t-name="CustomDiscountButton">
+        <div class='control-button'>
+            <i class="fa fa-percent" aria-hidden="true"></i> Custom Discount
+        </div>
+    </t>
+    
+</templates>

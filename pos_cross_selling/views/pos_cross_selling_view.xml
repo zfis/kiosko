@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="product_cross_selling_tree">
+            <field name="name">product.cross.selling.tree</field>
+            <field name="model">product.cross.selling</field>
+            <field name="arch" type="xml">
+                <tree string="Product Cross-Selling">
+                    <field name="product_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_cross_selling_form">
+            <field name="name">product.cross.selling.form</field>
+            <field name="model">product.cross.selling</field>
+            <field name="arch" type="xml">
+                <form string="Product Cross-Selling">
+                    <sheet>
+                        <group colspan="4" col="4">
+                            <field name="product_id" options="{'no_create': True}"/>
+                            <field name="active"/>
+                        </group>
+                        <group colspan="4" cols="4">
+                            <field name="lines" colspan="4" col="4" nolabel="1">
+                                <tree string="Lines">
+                                    <field name="product_id"/>
+                                    <field name="price_product" />
+                                    <field name="price_product_copy" invisible='1'/>
+                                    <field name="is_active"/>
+                                    <field name="discount_type"/>
+                                    <field name="discount"/>
+                                    <field name="price_subtotal"/>
+                                </tree>
+                                <form string="Lines">
+                                    <group colspan="4" col="4">
+                                        <field name="product_id" options="{'no_create': True}"
+                                               domain="[('id','!=',parent.product_id), ('available_in_pos', '=', True)]"/>
+                                        <field name="is_active"/>
+                                        <field name="price_product"/>
+                                        <field name="price_product_copy" invisible='1'/>
+                                        <field name="discount_type"/>
+                                        <field name="discount"/>
+                                        <field name="price_subtotal"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_cross_selling" model="ir.actions.act_window">
+            <field name="name">Product Cross-Selling</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.cross.selling</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_product_cross_selling" action="action_product_cross_selling"
+                  parent="point_of_sale.menu_point_config_product"/>
+
+        <record model="ir.ui.view" id="product_cross_selling_history_tree">
+            <field name="name">product.cross.selling.history.tree</field>
+            <field name="model">product.cross.selling.history</field>
+            <field name="arch" type="xml">
+                <tree string="Cross-Selling History" create="false" edit="false">
+                    <field name="order_id"/>
+                    <field name="date"/>
+                    <field name="sell_time"/>
+                    <field name="user_id"/>
+                    <field name="product_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_cross_selling_history_form">
+            <field name="name">product.cross.selling.history.form</field>
+            <field name="model">product.cross.selling.history</field>
+            <field name="arch" type="xml">
+                <form string="Product Cross-Selling History" create="false" edit="false">
+                    <sheet>
+                        <group>
+	                        <group>
+	                            <field name="order_id" options="{'no_create': True}"/>
+	                            <field name="date"/>
+	                            <field name="sell_time"/>
+	                        </group>
+	                        <group>
+	                            <field name="product_ids" widget="many2many_tags"/>
+	                            <field name="user_id" />
+	                        </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_cross_selling_history" model="ir.actions.act_window">
+            <field name="name">Cross-Selling History</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.cross.selling.history</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_product_cross_selling_history" action="action_product_cross_selling_history"
+                 parent="point_of_sale.menu_point_config_product"/>
+
+    </data>
+</odoo>
