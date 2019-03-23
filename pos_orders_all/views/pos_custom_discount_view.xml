@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	    
+	 <!-- Add Custom Fields in pos.config -->
+        <record model="ir.ui.view" id="custom_bi_pos_discount_form_view">
+            <field name="name">pos.config.form.extended.view</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[5]" position="after">
+                    <h2 name="order">Discount Configuration in POS</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div id="discount_type" class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="discount_type" string='Discount Type'/>
+                                <field name="discount_type"/>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+                
+            </field>
+       </record>
+       
+    <record model="ir.ui.view" id="pos_sale_order_inherit_new">
+        <field name="name">pos.order.view.form.new</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="discount_type">Discount type</field>
+            </xpath>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="pos_order_line_inherit">
+        <field name="name">pos.order.line.form</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page/field[@name='lines']//tree/field[@name='discount']" position="attributes">
+                <attribute name="string">Discount</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page/field[@name='lines']//form/group/field[@name='discount']" position="attributes">
+                <attribute name="string">Discount</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="pos_order_line_inherit_tree">
+        <field name="name">pos.order.line.tree</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page/field[@name='lines']//tree/field[@name='discount']" position="before">
+                <field name="discount_line_type" invisible="1">Discount type</field>
+            </xpath>
+        </field>
+    </record>
+        
+    </data>
+</odoo>
