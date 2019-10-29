@@ -21,7 +21,7 @@ class pos_gift_coupon(models.Model):
 	
 	
 	def print_report_coupons(self):
-		return self.env.ref('pos_orders_all.action_gift_coupons').report_action(self)
+		return self.env.ref('action_gift_coupons').report_action(self)
 
 
 	@api.multi
